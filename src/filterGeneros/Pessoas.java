@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class Pessoas {
     List<List<String>> masculino = new LinkedList<>();
@@ -29,8 +30,19 @@ public class Pessoas {
         JOptionPane.showMessageDialog(null,"Lista Masculina " + stringNomeGenero(masculino));
     }
     public String stringNomeGenero(List<List<String>>genero){
-        return genero.stream().flatMap(List::stream).reduce("", (accumulator, element) -> accumulator + " \n" + element);
-
+        StringBuilder valorString = new StringBuilder();
+        genero.forEach(elemento -> {
+            for(String item : elemento){
+                valorString.append(item).append("\n");
+            }
+        });
+        return valorString.toString();
+    }
+    public List<List<String>> getFeminino(){
+        return feminino;
+    }
+    public List<List<String>> getMasculino(){
+        return masculino;
     }
     }
 
